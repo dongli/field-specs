@@ -60,6 +60,9 @@ The test results are:
       [Spec]: 2d
       [Spec]: keep_vert_coord
 
+I referred `http://panthema.net/2007/flex-bison-cpp-example/` and adapted the
+example there for my case. Thank `Timo Bingmann` for the great example!
+
 Author
 ======
 
