@@ -1,0 +1,8 @@
+*.o
+location.hh
+position.hh
+stack.hh
+FieldSpecsParser.cpp
+FieldSpecsParser.h
+FieldSpecsScanner.cpp
+test

@@ -14,6 +14,7 @@ int main(void)
     inputs.push_back("1+2");
     inputs.push_back("1.0e+3*(X+2)");
     inputs.push_back("2d:keep_vert_coord");
+    inputs.push_back("U:[m s-1]");
 
     for (int j = 0; j < inputs.size(); ++j) {
         std::cout << "--> Input: " << inputs[j] << std::endl;

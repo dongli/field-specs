@@ -59,6 +59,10 @@ The test results are:
     AST Nodes:
       [Spec]: 2d
       [Spec]: keep_vert_coord
+    --> Input: U:[m s-1]
+    AST Nodes:
+      [ID]: U
+      [Spec]: units: m s-1
 
 I referred `http://panthema.net/2007/flex-bison-cpp-example/` and adapted the
 example there for my case. Thank `Timo Bingmann` for the great example!

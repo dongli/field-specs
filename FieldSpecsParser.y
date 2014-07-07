@@ -24,20 +24,21 @@
 }
 
 %token END 0
-%token <doubleValue> NUMBER
-%token <stringValue> ID
+%token NUMBER ID
 %token ADD SUB MUL DIV
 %token OPEN_PAREN CLOSE_PAREN COMMA COLON
-%token D_2 D_3 KEEP_VERT_COORD
+%token D_2 D_3 UNITS KEEP_VERT_COORD
 
 %left ADD SUB
 %left MUL DIV
 %nonassoc NEG
 
+%type <doubleValue> NUMBER
+%type <stringValue> ID UNITS
 %type <astNode> number id argumentList funcionCall expression section
 
-%destructor { delete $$; } ID
-%destructor { delete $$; } number id argumentList funcionCall expression
+%destructor { delete $$; } ID UNITS
+%destructor { delete $$; } number id argumentList funcionCall expression section
 
 %{
 #include "FieldSpecsDriver.h"
@@ -80,19 +81,19 @@ expression: number {
                 $$ = $1;
             }
           | expression ADD expression {
-                $$ = new FieldSpecsAstExprNode($1, ADD, $3);
+                $$ = new FieldSpecsAstExprNode($1, ADD_OP, $3);
             }
           | expression SUB expression {
-                $$ = new FieldSpecsAstExprNode($1, SUB, $3);
+                $$ = new FieldSpecsAstExprNode($1, SUB_OP, $3);
             }
           | expression MUL expression {
-                $$ = new FieldSpecsAstExprNode($1, MUL, $3);
+                $$ = new FieldSpecsAstExprNode($1, MUL_OP, $3);
             }
           | expression DIV expression {
-                $$ = new FieldSpecsAstExprNode($1, DIV, $3);
+                $$ = new FieldSpecsAstExprNode($1, DIV_OP, $3);
             }
           | SUB expression %prec NEG {
-                $$ = new FieldSpecsAstExprNode($2, NEG);
+                $$ = new FieldSpecsAstExprNode($2, NEG_OP);
             }
           | OPEN_PAREN expression CLOSE_PAREN {
                 $$ = $2;
@@ -100,9 +101,10 @@ expression: number {
           ;
 
 section: expression { $$ = $1; }
-       | D_2 { $$ = new FieldSpecsAstSpecNode(D_2); }
-       | D_3 { $$ = new FieldSpecsAstSpecNode(D_3); }
-       | KEEP_VERT_COORD { $$ = new FieldSpecsAstSpecNode(KEEP_VERT_COORD); }
+       | D_2 { $$ = new FieldSpecsAstSpecNode(D_2_SPEC); }
+       | D_3 { $$ = new FieldSpecsAstSpecNode(D_3_SPEC); }
+       | UNITS { $$ = new FieldSpecsAstSpecNode(UNITS_SPEC, $1); }
+       | KEEP_VERT_COORD { $$ = new FieldSpecsAstSpecNode(KEEP_VERT_COORD_SPEC); }
        ;
 
 specs:

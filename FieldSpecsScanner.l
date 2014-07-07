@@ -32,6 +32,11 @@ typedef geodiag_cmor::FieldSpecsParser::token_type token_type;
 
 "3d" { return token::D_3; }
 
+"["[^\]]+"]" {
+    yylval->stringValue = new string(yytext+1, yyleng-2);
+    return token::UNITS;
+}
+
 [0-9]+("."[0-9]*([eEdD][+-][0-9]+)?)? {
     yylval->doubleValue = atof(yytext);
     return token::NUMBER;
