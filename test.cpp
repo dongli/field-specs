@@ -1,14 +1,12 @@
 #include "FieldSpecsDriver.h"
 #include "FieldSpecsAst.h"
 
-using namespace geodiag_cmor;
-
 int main(void)
 {
     geodiag_cmor::FieldSpecsAst ast;
     geodiag_cmor::FieldSpecsDriver driver(&ast, false, false);
 
-    vector<string> inputs;
+    std::vector<std::string> inputs;
     inputs.push_back("1");
     inputs.push_back("2.0e+3");
     inputs.push_back("U");
@@ -19,15 +17,12 @@ int main(void)
     inputs.push_back("2d:keep_vert_coord");
 
     for (int j = 0; j < inputs.size(); ++j) {
-        cout << "Input: " << inputs[j] << endl;
+        std::cout << "--> Input: " << inputs[j] << std::endl;
         ast.reset();
         if (driver.parse(inputs[j])) {
-            cout << "AST Nodes:" << endl;
-            for (int i = 0; i < ast.getNumSectionNode(); ++i) {
-                ast.getSectionNodes()[i]->print(cout, 1);
-            }
+            ast.print(std::cout);
         } else {
-            cerr << "[Error]: Failed to parse!" << endl;
+            std::cerr << "[Error]: Failed to parse!" << std::endl;
         }
     }
 

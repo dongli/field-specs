@@ -20,6 +20,13 @@ public:
     const vector<FieldSpecsAstNode*>& getSectionNodes() const {
         return sectionNodes;
     }
+
+    void print(std::ostream &os) const {
+        os << "AST Nodes:" << endl;
+        for (int i = 0; i < getNumSectionNode(); ++i) {
+            getSectionNodes()[i]->print(os, 1);
+        }
+    }
 };
 
 } // geodiag_cmor
