@@ -8,7 +8,7 @@ CXX = g++
 CXXFLAGS = -I$(FLEX_ROOT)/include
 LDFLAGS =
 
-HEADERS = FieldSpecsAstNode.h FieldSpecsAst.h FieldSpecsDriver.h
+HEADERS = FieldSpecs.h FieldSpecsAstNode.h FieldSpecsAst.h FieldSpecsDriver.h
 OBJECTS = test.o FieldSpecsParser.o FieldSpecsScanner.o FieldSpecsDriver.o
 
 all: test
